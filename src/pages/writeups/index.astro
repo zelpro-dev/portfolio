@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import Writeups from "@components/Writeups"
+import { WRITEUPS } from "@consts"
+
+const writeups = (await getCollection("writeups"))
+  .filter(writeup => !writeup.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const tags = [...new Set(writeups.flatMap(post => post.data.tags))]
+  .sort((a, b) => a.localeCompare(b))
+---
+
+<PageLayout title={WRITEUPS.TITLE} description={WRITEUPS.DESCRIPTION}>
+  <TopLayout>
+    <div class="animate page-heading">
+      {WRITEUPS.TITLE}
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <Writeups client:load tags={tags} data={writeups} />
+    </div>
+  </BottomLayout>
+</PageLayout>
+
+
