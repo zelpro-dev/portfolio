@@ -86,6 +86,7 @@ bash revshell.sh
 ```
 Si todo ha ido bien, deberíamos tener la reverse shell.
 ![Reverse shell](./4.png)
+# Escalada de privilegios
 Estando dentro podemos ver que hay un archivo config.php, así que veremos su contenido, puede ser importante.
 ![Config PHP](./5.png)
 Gracias al comando:
