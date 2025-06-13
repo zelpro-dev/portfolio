@@ -6,6 +6,7 @@ draft: false
 tags:
 - HTB
 - Easy
+- SQLi
 ---
 
 # Reconocimiento
