@@ -265,7 +265,7 @@ export default function Component() {
       <section className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-8 px-6">
           <Avatar
-            className={`w-48 h-48 mx-auto transition-all duration-700 ${
+            className={`w-40 h-40 md:w-48 md:h-48 mx-auto transition-all duration-700 ${
               isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"
             } hover:scale-105`}
           >
@@ -280,7 +280,7 @@ export default function Component() {
 
           <div className="space-y-4">
             <h1
-              className={`text-5xl md:text-6xl font-bold transition-all duration-700 delay-300 ${
+              className={`text-3xl md:text-6xl font-bold transition-all duration-700 delay-300 ${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
@@ -289,7 +289,7 @@ export default function Component() {
               Alejandro Bolado
             </h1>
             <p
-              className={`text-xl md:text-2xl text-neutral-400 font-light transition-all duration-700 delay-500 ${
+              className={`text-lg md:text-2xl text-neutral-400 font-light transition-all duration-700 delay-500 ${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
@@ -298,7 +298,7 @@ export default function Component() {
               Full Stack Web Developer
             </p>
             <p
-              className={`text-lg text-neutral-500 max-w-2xl mx-auto transition-all duration-700 delay-700 ${
+              className={`text-md sm:text-lg text-neutral-500 max-w-2xl mx-auto transition-all duration-700 delay-700 ${
                 isVisible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
