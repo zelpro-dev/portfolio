@@ -44,11 +44,13 @@ import {
   ArrowRight,
   Instagram,
   Camera,
+  AtSign,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { Lens } from "@/components/ui/lens";
 
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,15 +66,22 @@ export default function Component() {
   }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const skills = [
-    { name: "React", icon: Atom, level: 95 },
-    { name: "Next.js", icon: Triangle, level: 90 },
-    { name: "TypeScript", icon: FileText, level: 90 },
-    { name: "Node.js", icon: Server, level: 85 },
-    { name: "Python", icon: Code2, level: 80 },
-    { name: "MongoDB", icon: Database, level: 85 },
-    { name: "PostgreSQL", icon: Layers, level: 80 },
-    { name: "Docker", icon: Container, level: 75 },
+  const devSkills = [
+    { name: "JavaScript", icon: "/icons/js.png", level: 70 },
+    { name: "Node.js", icon: "/icons/njs.png", level: 85 },
+    { name: "React", icon: "/icons/react.png", level: 65 },
+    { name: "Next.js", icon: "/icons/nextjs.png", level: 70 },
+    { name: "TailWindCSS", icon: "/icons/tw.png", level: 80 },
+    { name: "MongoDB", icon: "/icons/mongo.png", level: 85 },
+    { name: "Supabase", icon: "/icons/supabase.png", level: 70 },
+    { name: "Discord.JS", icon: "/icons/djs.png", level: 90 },
+    { name: "Astro", icon: "/icons/astro.png", level: 60 },
+  ];
+
+  const photography = [
+    { name: "Lightroom", icon: "/icons/lr.png" },
+    { name: "Photoshop", icon: "/icons/ps.png" },
+    { name: "Davinci Resolve", icon: "/icons/dr.png" },
   ];
 
   const projects = [
@@ -161,16 +170,29 @@ export default function Component() {
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-neutral-800/50 rounded-b-3xl max-w-5xl mx-auto">
-        <nav className="container mx-auto px-6 py-6">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-lg border-b border-white/20">
+        <nav className="container mx-auto px-5 py-5">
           <div className="flex items-center justify-between">
             <div
-              className={`text-xl font-semibold transition-all duration-500 ${
+              className={`text-md font-semibold transition-all duration-500 flex justify-center items-center gap-4 ${
                 isVisible
                   ? "translate-x-0 opacity-100"
                   : "-translate-x-10 opacity-0"
               }`}
             >
+              <Avatar
+                className={`w-10 h-10 mx-auto transition-all duration-700 ${
+                  isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"
+                } hover:scale-105 relative`}
+              >
+                <AvatarImage
+                  src="/fotomia.png?height=24&width=24"
+                  alt="Profile"
+                />
+                <AvatarFallback className="text-4xl bg-gradient-to-br from-neutral-700 to-neutral-800 text-white">
+                  AB
+                </AvatarFallback>
+              </Avatar>
               Alejandro Bolado
             </div>
 
@@ -335,7 +357,7 @@ export default function Component() {
             </Badge>
           </div>
           {/* Scroll Indicator */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
             <svg
               className="w-6 h-6 text-neutral-500"
               fill="none"
@@ -351,8 +373,6 @@ export default function Component() {
             </svg>
           </div>
         </div>
-
-        <BackgroundBeams />
       </section>
 
       <main className="container mx-auto px-6 py-20 space-y-32 relative z-20">
@@ -369,25 +389,24 @@ export default function Component() {
             </p>
           </div>
 
-          {/* Skills Grid */}
-          <div className="max-w-4xl mx-auto">
+          {/* Dev Skills Grid */}
+          <div className="max-w-4xl mx-auto mb-12">
             <h3 className="text-2xl font-semibold text-center mb-12">
-              Tecnologías
+              Tecnologías como programador
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {skills.map((skill, index) => {
-                const IconComponent = skill.icon;
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+              {devSkills.map((skill, index) => {
                 return (
                   <div
                     key={index}
-                    className="text-center space-y-4 p-6 rounded-2xl bg-neutral-900/30 hover:bg-neutral-900/50 hover:scale-105 transition-all duration-300 group backdrop-blur-sm border border-neutral-800/50 hover:border-neutral-700/50 hover:shadow-md hover:shadow-blue-500/5"
+                    className="w-full flex flex-col items-center text-center space-y-4 p-6 rounded-2xl bg-neutral-900/30 hover:bg-neutral-900/50 hover:scale-105 transition-all duration-300 group backdrop-blur-sm border border-neutral-800/50 hover:border-neutral-700/50 hover:shadow-md hover:shadow-blue-500/5"
                   >
-                    <IconComponent className="w-12 h-12 mx-auto text-white group-hover:text-blue-400 transition-colors duration-300" />
-                    <div className="space-y-2">
+                    <img src={skill.icon} className="w-14 h-14" />
+                    <div className="space-y-2 w-full">
                       <h4 className="font-medium text-white">{skill.name}</h4>
                       <div className="w-full bg-neutral-800 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-blue-400 to-purple-400 h-2 rounded-full transition-all duration-700"
+                          className="bg-white h-2 rounded-full transition-all duration-700"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -401,13 +420,34 @@ export default function Component() {
             </div>
           </div>
 
+          {/* Photography Skills Grid */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <h3 className="text-2xl font-semibold text-center mb-12">
+              Habilidades como fotógrafo
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+              {photography.map((skill, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-full flex flex-col items-center text-center space-y-4 p-6 rounded-2xl bg-neutral-900/30 hover:bg-neutral-900/50 hover:scale-105 transition-all duration-300 group backdrop-blur-sm border border-neutral-800/50 hover:border-neutral-700/50 hover:shadow-md hover:shadow-blue-500/5"
+                  >
+                    <img src={skill.icon} className="w-14 h-14" />
+                    <div className="space-y-2 w-full">
+                      <h4 className="font-medium text-white">{skill.name}</h4>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
             {[
-              { number: "50+", label: "Proyectos" },
+              { number: "10+", label: "Proyectos" },
               { number: "3+", label: "Años" },
-              { number: "20+", label: "Clientes" },
-              { number: "15+", label: "Tecnologías" },
+              { number: "10+", label: "Clientes" },
             ].map((stat, index) => (
               <div
                 key={index}
@@ -476,6 +516,55 @@ export default function Component() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </section>
+
+        {/* Photography Section */}
+        <section id="projects" className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold">Mis fotos</h2>
+            <p className="text-neutral-300 text-lg max-w-2xl mx-auto">
+              Una selección de mis trabajos más recientes y significativos
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {[
+              "/photos/1.jpg",
+              "/photos/2.jpg",
+              "/photos/3.jpg",
+              "/photos/4.jpg",
+              "/photos/5.jpg",
+              "/photos/6.jpg",
+              "/photos/7.jpg",
+              "/photos/8.jpg",
+            ].map((src, index) => (
+              <div
+                key={index}
+                className="overflow-hidden rounded-2xl shadow-lg group cursor-pointer"
+              >
+                <Lens>
+                  <img
+                    src={src}
+                    alt={`Foto ${index + 1}`}
+                    className="w-full h-100 object-cover transform"
+                  />
+                </Lens>
+              </div>
+            ))}
+          </div>
+
+          {/* Botón "Ver más" */}
+          <div className="text-center mt-10">
+            <a
+              href="https://instagram.com/bolado.visuals" // cambia esto por tu enlace real
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-3 w-fit mx-auto px-6 py-3 bg-white text-black font-semibold rounded-full shadow hover:bg-neutral-200 transition-colors duration-200"
+            >
+              <Instagram />
+              Ver más en mi Instagram
+            </a>
           </div>
         </section>
 
@@ -562,170 +651,96 @@ export default function Component() {
           </div>
 
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-green-500/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {/* Card 1: Información de Contacto */}
+              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-green-500/5">
                 <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-6 flex items-center gap-4 text-white">
+                    <Phone className="w-6 h-6 text-green-400" />
+                    Información de Contacto
+                  </h3>
                   <div className="space-y-6">
-                    <div className="text-center space-y-2">
-                      <h3 className="text-2xl font-semibold flex items-center justify-center gap-2">
-                        <MessageSquare className="w-6 h-6 text-blue-400" />
-                        Envíame un mensaje
-                      </h3>
-                      <p className="text-neutral-300">
-                        Te responderé lo antes posible
-                      </p>
-                    </div>
-
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-neutral-300 flex items-center gap-2">
-                          <User className="w-4 h-4" />
-                          Nombre
-                        </label>
-                        <Input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          placeholder="Tu nombre completo"
-                          className="bg-neutral-800/50 border-neutral-700 text-white placeholder-neutral-400 rounded-xl focus:border-blue-400 transition-colors duration-200 backdrop-blur-sm"
-                          required
-                        />
+                    {[
+                      {
+                        icon: Mail,
+                        label: "Email",
+                        value: "alexbolatrue@gmail.com",
+                      },
+                      {
+                        icon: MapPin,
+                        label: "Ubicación",
+                        value: "Cantabria, España",
+                      },
+                      {
+                        icon: AtSign,
+                        label: "Discord",
+                        value: "@zelpro",
+                      },
+                    ].map((contact, index) => (
+                      <div key={index} className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-neutral-800 rounded-full flex items-center justify-center hover:bg-neutral-700 transition-colors duration-200">
+                          <contact.icon className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white font-medium">
+                            {contact.label}
+                          </p>
+                          <p className="text-neutral-300">{contact.value}</p>
+                        </div>
                       </div>
-
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-neutral-300 flex items-center gap-2">
-                          <Mail className="w-4 h-4" />
-                          Email
-                        </label>
-                        <Input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="tu@email.com"
-                          className="bg-neutral-800/50 border-neutral-700 text-white placeholder-neutral-400 rounded-xl focus:border-purple-400 transition-colors duration-200 backdrop-blur-sm"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-neutral-300 flex items-center gap-2">
-                          <MessageSquare className="w-4 h-4" />
-                          Mensaje
-                        </label>
-                        <Textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleInputChange}
-                          placeholder="Cuéntame sobre tu proyecto..."
-                          rows={5}
-                          className="bg-neutral-800/50 border-neutral-700 text-white placeholder-neutral-400 rounded-xl focus:border-green-400 transition-colors duration-200 resize-none backdrop-blur-sm"
-                          required
-                        />
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium py-3 rounded-xl hover:scale-105 transition-all duration-200 hover:shadow-md hover:shadow-blue-500/15"
-                      >
-                        <Send className="w-5 h-5 mr-2" />
-                        Enviar Mensaje
-                      </Button>
-                    </form>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Contact Info */}
-              <div className="space-y-8">
-                <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-green-500/5">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                      <Phone className="w-6 h-6 text-green-400" />
-                      Información de Contacto
-                    </h3>
-                    <div className="space-y-6">
-                      {[
-                        {
-                          icon: Mail,
-                          label: "Email",
-                          value: "alejandro@email.com",
-                        },
-                        {
-                          icon: Phone,
-                          label: "Teléfono",
-                          value: "+1 (555) 123-4567",
-                        },
-                        {
-                          icon: MapPin,
-                          label: "Ubicación",
-                          value: "Ciudad, País",
-                        },
-                      ].map((contact, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center space-x-4"
-                        >
-                          <div className="w-12 h-12 bg-neutral-800 rounded-full flex items-center justify-center hover:bg-neutral-700 transition-colors duration-200">
-                            <contact.icon className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <p className="text-white font-medium">
-                              {contact.label}
-                            </p>
-                            <p className="text-neutral-300">{contact.value}</p>
-                          </div>
+              {/* Card 2: Redes Sociales */}
+              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-purple-500/5">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-6 flex items-center gap-4 text-white">
+                    <Globe className="w-6 h-6 text-purple-400" />
+                    Redes Sociales
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      {
+                        icon: Github,
+                        name: "GitHub",
+                        handle: "@zelpro-dev",
+                        href: "https://github.com/zelpro-dev"
+                      },
+                      {
+                        icon: Instagram,
+                        name: "Mi Instagram",
+                        handle: "@alejandro_bolado_",
+                        href: "https://instagram.com/alejandro_bolado_"
+                      },
+                      {
+                        icon: Instagram,
+                        name: "Bolado Visuals (Fotografía)",
+                        handle: "@bolado.visuals",
+                        href: "https://instagram.com/bolado.visuals"
+                      },
+                    ].map((social, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        className="w-full rounded-xl border-neutral-700 bg-neutral-900/30 hover:bg-neutral-900/30 hover:text-white text-white hover:scale-105 justify-start h-16 transition-all duration-200 backdrop-blur-sm "
+                      >
+                        <a className="flex items-center justify-center w-full mx-auto" target="_blank" rel="noopener noreferrer" href={social.href}>
+                        <social.icon className="w-6 h-6 mr-4" />
+                        <div className="text-left">
+                          <p className="font-medium">{social.name}</p>
+                          <p className="text-sm text-neutral-400">
+                            {social.handle}
+                          </p>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-purple-500/5">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                      <Globe className="w-6 h-6 text-purple-400" />
-                      Redes Sociales
-                    </h3>
-                    <div className="space-y-4">
-                      {[
-                        {
-                          icon: Github,
-                          name: "GitHub",
-                          handle: "@alejandrobolado",
-                        },
-                        {
-                          icon: Linkedin,
-                          name: "LinkedIn",
-                          handle: "Alejandro Bolado",
-                        },
-                        {
-                          icon: Instagram,
-                          name: "Instagram",
-                          handle: "alejandrobolado.com",
-                        },
-                      ].map((social, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          className="w-full rounded-xl border-neutral-700 bg-transparent text-white hover:bg-neutral-800 hover:scale-105 justify-start h-16 transition-all duration-200 backdrop-blur-sm hover:border-neutral-600 hover:shadow-md hover:shadow-purple-500/5"
-                        >
-                          <social.icon className="w-6 h-6 mr-4" />
-                          <div className="text-left">
-                            <p className="font-medium">{social.name}</p>
-                            <p className="text-sm text-neutral-400">
-                              {social.handle}
-                            </p>
-                          </div>
-                          <ArrowRight className="w-5 h-5 ml-auto" />
-                        </Button>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                        <ArrowRight className="w-5 h-5 ml-auto" />
+                        </a>
+                      </Button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
@@ -748,7 +763,7 @@ export default function Component() {
               </Avatar>
               <div>
                 <h3 className="text-2xl font-bold mb-2">Alejandro Bolado</h3>
-                <p className="text-neutral-300">Full Stack Web Developer</p>
+                <p className="text-neutral-300">Web Developer</p>
               </div>
             </div>
 
@@ -780,8 +795,7 @@ export default function Component() {
                 <h4 className="text-lg font-semibold mb-4">Contacto</h4>
                 <div className="space-y-2 text-neutral-300">
                   <p>alexbolatrue@gmail.com</p>
-                  <p>+1 (555) 123-4567</p>
-                  <p>Ciudad, País</p>
+                  <p>Cantabria, España</p>
                 </div>
               </div>
 
@@ -789,7 +803,7 @@ export default function Component() {
               <div className="text-center md:text-right">
                 <h4 className="text-lg font-semibold mb-4">Sígueme</h4>
                 <div className="flex justify-center md:justify-end space-x-4">
-                  {[Github, Linkedin, Instagram].map((Icon, index) => (
+                  {[Github, Instagram].map((Icon, index) => (
                     <a
                       key={index}
                       href="#"
@@ -809,8 +823,7 @@ export default function Component() {
                   © 2025 Alejandro Bolado. Todos los derechos reservados.
                 </div>
                 <div className="text-neutral-300 text-sm flex items-center">
-                  Hecho con <span className="text-red-500 mx-1">❤️</span> y
-                  mucho café
+                  Hecho con <span className="text-red-500 mx-1">❤️</span>
                 </div>
               </div>
             </div>
