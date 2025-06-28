@@ -8,7 +8,9 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Alejandro Bolado - Portfolio",
   description: "Full Stack Web Developer Portfolio",
-    generator: 'v0.dev'
+  icons: {
+    icon: "/favicon.ico"
+  }
 }
 
 export default function RootLayout({
@@ -23,6 +25,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={jakarta.className}>{children}</body>
     </html>
