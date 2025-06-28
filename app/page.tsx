@@ -100,23 +100,7 @@ export default function Component() {
       image: "/projects/studygate.png",
       tags: ["Next.js", "TailwindCSS", "Supabase", "ShadCN"],
       link: "https://studygate-kappa.vercel.app/",
-    },
-    {
-      title: "Better Pokedex",
-      description:
-        "Una pokedex con interfaz moderna y gran cantidad de información. Utiliza la PokeAPI para nutrirse de datos",
-      image: "/placeholder.svg?height=200&width=300",
-      tags: ["NextJS", "TailwindCSS", "PokeAPI"],
-      link: "https://better-pokedex.vercel.app/",
-    },
-    {
-      title: "Politimos",
-      description:
-        "Web donde se exponen todos los casos de corrupción política en españa.",
-      image: "/placeholder.svg?height=200&width=300",
-      tags: ["Next.js", "TailwindCSS"],
-      link: "https://politimos.vercel.app/",
-    },
+    }
   ];
 
   const education = [
