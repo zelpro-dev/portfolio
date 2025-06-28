@@ -244,7 +244,6 @@ const AnimatedGradient = () => {
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -253,14 +252,6 @@ export default function Component() {
 
   useEffect(() => {
     setIsVisible(true)
-
-    // Seguimiento del mouse para efectos interactivos
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
   const skills = [
@@ -356,16 +347,6 @@ export default function Component() {
       <AnimatedGradient />
       <FloatingOrbs />
       <FloatingParticles />
-
-      {/* Efecto de seguimiento del mouse */}
-      <div
-        className="fixed pointer-events-none z-10 w-6 h-6 rounded-full bg-white/10 blur-sm transition-all duration-300 ease-out"
-        style={{
-          left: mousePosition.x - 12,
-          top: mousePosition.y - 12,
-          transform: "scale(1)",
-        }}
-      />
 
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-neutral-800/50">
