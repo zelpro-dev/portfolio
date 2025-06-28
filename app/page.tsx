@@ -1,13 +1,19 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Mail,
   Phone,
@@ -37,222 +43,26 @@ import {
   MessageSquare,
   ArrowRight,
   Instagram,
-} from "lucide-react"
-import Image from "next/image"
-import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
-
-// Componente de partículas flotantes
-const FloatingParticles = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    // Configurar el canvas
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    resizeCanvas()
-    window.addEventListener("resize", resizeCanvas)
-
-    // Crear partículas
-    const particles: Array<{
-      x: number
-      y: number
-      size: number
-      speedX: number
-      speedY: number
-      opacity: number
-      color: string
-    }> = []
-
-    const colors = ["#3b82f6", "#8b5cf6", "#06b6d4", "#10b981", "#f59e0b"]
-
-    // Inicializar partículas
-    for (let i = 0; i < 20; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.3 + 0.1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      })
-    }
-
-    // Función de animación
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      particles.forEach((particle, index) => {
-        // Actualizar posición
-        particle.x += particle.speedX
-        particle.y += particle.speedY
-
-        // Rebotar en los bordes
-        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1
-
-        // Dibujar partícula con glow
-        ctx.save()
-        ctx.globalAlpha = particle.opacity
-
-        // Efecto glow
-        ctx.shadowColor = particle.color
-        ctx.shadowBlur = 8
-        ctx.fillStyle = particle.color
-
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fill()
-
-        ctx.restore()
-
-        // Conectar partículas cercanas
-        particles.forEach((otherParticle, otherIndex) => {
-          if (index !== otherIndex) {
-            const dx = particle.x - otherParticle.x
-            const dy = particle.y - otherParticle.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            if (distance < 100) {
-              ctx.save()
-              ctx.globalAlpha = ((100 - distance) / 100) * 0.1
-              ctx.strokeStyle = particle.color
-              ctx.lineWidth = 1
-              ctx.beginPath()
-              ctx.moveTo(particle.x, particle.y)
-              ctx.lineTo(otherParticle.x, otherParticle.y)
-              ctx.stroke()
-              ctx.restore()
-            }
-          }
-        })
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas)
-    }
-  }, [])
-
-  return (
-    <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" style={{ background: "transparent" }} />
-  )
-}
-
-// Componente de orbes flotantes
-const FloatingOrbs = () => {
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Orbe azul */}
-      <div
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"
-        style={{
-          animation: "float 6s ease-in-out infinite",
-          animationDelay: "0s",
-        }}
-      />
-
-      {/* Orbe púrpura */}
-      <div
-        className="absolute top-3/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse"
-        style={{
-          animation: "float 8s ease-in-out infinite reverse",
-          animationDelay: "2s",
-        }}
-      />
-
-      {/* Orbe verde */}
-      <div
-        className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse"
-        style={{
-          animation: "float 7s ease-in-out infinite",
-          animationDelay: "4s",
-        }}
-      />
-
-      {/* Orbe cian */}
-      <div
-        className="absolute top-1/2 right-1/3 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"
-        style={{
-          animation: "float 9s ease-in-out infinite reverse",
-          animationDelay: "1s",
-        }}
-      />
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
-          25% { transform: translateY(-20px) translateX(10px) scale(1.05); }
-          50% { transform: translateY(0px) translateX(20px) scale(1); }
-          75% { transform: translateY(20px) translateX(-10px) scale(0.95); }
-        }
-      `}</style>
-    </div>
-  )
-}
-
-// Componente de gradiente animado
-const AnimatedGradient = () => {
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0">
-      <div
-        className="absolute inset-0 opacity-15"
-        style={{
-          background: `
-            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%)
-          `,
-          animation: "gradientShift 10s ease-in-out infinite",
-        }}
-      />
-
-      <style jsx>{`
-        @keyframes gradientShift {
-          0%, 100% { 
-            filter: hue-rotate(0deg) brightness(1);
-          }
-          25% { 
-            filter: hue-rotate(90deg) brightness(1.2);
-          }
-          50% { 
-            filter: hue-rotate(180deg) brightness(0.8);
-          }
-          75% { 
-            filter: hue-rotate(270deg) brightness(1.1);
-          }
-        }
-      `}</style>
-    </div>
-  )
-}
+  Camera,
+} from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 export default function Component() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
+  });
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    setIsVisible(true);
+  }, []);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const skills = [
     { name: "React", icon: Atom, level: 95 },
@@ -263,45 +73,50 @@ export default function Component() {
     { name: "MongoDB", icon: Database, level: 85 },
     { name: "PostgreSQL", icon: Layers, level: 80 },
     { name: "Docker", icon: Container, level: 75 },
-  ]
+  ];
 
   const projects = [
     {
       title: "JGS Store",
-      description: "Una tienda de scripts de Fivem hecha con NextJS y Tebex para JGS Store.",
+      description:
+        "Una tienda de scripts de Fivem hecha con NextJS y Tebex para JGS Store.",
       image: "/projects/jgs-store.png",
       tags: ["NextJS", "TailwindCSS", "TebexAPI"],
       link: "https://jgs-store.com",
     },
     {
       title: "StudyGate",
-      description: "Plataforma de estudio con funcionalidades avanzadas en seguimiento de progreso. (En desarrollo...)",
+      description:
+        "Plataforma de estudio con funcionalidades avanzadas en seguimiento de progreso. (En desarrollo...)",
       image: "/projects/studygate.png",
       tags: ["Next.js", "TailwindCSS", "Supabase", "ShadCN"],
       link: "https://studygate-kappa.vercel.app/",
     },
     {
       title: "Better Pokedex",
-      description: "Una pokedex con interfaz moderna y gran cantidad de información. Utiliza la PokeAPI para nutrirse de datos",
+      description:
+        "Una pokedex con interfaz moderna y gran cantidad de información. Utiliza la PokeAPI para nutrirse de datos",
       image: "/placeholder.svg?height=200&width=300",
       tags: ["NextJS", "TailwindCSS", "PokeAPI"],
       link: "https://better-pokedex.vercel.app/",
     },
     {
       title: "Politimos",
-      description: "Web donde se exponen todos los casos de corrupción política en españa.",
+      description:
+        "Web donde se exponen todos los casos de corrupción política en españa.",
       image: "/placeholder.svg?height=200&width=300",
       tags: ["Next.js", "TailwindCSS"],
       link: "https://politimos.vercel.app/",
     },
-  ]
+  ];
 
   const education = [
     {
       title: "Bachillerato Tecnológico",
       institution: "IES Marqués de Santillana",
       period: "2024 - Presente",
-      description: "Con pensamiento futuro de una ingienería en informática o telecomunicaciones",
+      description:
+        "Con pensamiento futuro de una ingienería en informática o telecomunicaciones",
     },
     {
       title: "English B2",
@@ -309,52 +124,51 @@ export default function Component() {
       period: "Presente",
       description: "Trabajando en la obtención del certificado B2",
     },
-  ]
+  ];
 
   const experience = [
     {
-      title: "Full Stack Developer",
+      title: "Web Developer",
       company: "JGS Store",
       period: "2024 - Presente",
       description: "Desarrollo de interfaces modernas con NextJS y Tebex",
     },
-  ]
+  ];
 
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
-    setIsMenuOpen(false)
-  }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
+  };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setFormData({ name: "", email: "", message: "" })
-  }
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    setFormData({ name: "", email: "", message: "" });
+  };
 
   return (
     <div
       className="min-h-screen bg-black text-white relative overflow-hidden"
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
-      {/* Efectos de fondo dinámicos */}
-      <AnimatedGradient />
-      <FloatingOrbs />
-      <FloatingParticles />
-
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-neutral-800/50">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-neutral-800/50 rounded-b-3xl max-w-5xl mx-auto">
         <nav className="container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div
               className={`text-xl font-semibold transition-all duration-500 ${
-                isVisible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-10 opacity-0"
               }`}
             >
               Alejandro Bolado
@@ -363,7 +177,9 @@ export default function Component() {
             {/* Desktop Navigation */}
             <div
               className={`hidden md:flex items-center space-x-8 transition-all duration-500 delay-200 ${
-                isVisible ? "translate-y-0 opacity-100" : "-translate-y-5 opacity-0"
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "-translate-y-5 opacity-0"
               }`}
             >
               <button
@@ -452,16 +268,16 @@ export default function Component() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative z-20">
-        <div className="text-center space-y-8 px-6">
+        <div className="text-center space-y-8 px-6 z-50">
           <Avatar
             className={`w-40 h-40 md:w-48 md:h-48 mx-auto transition-all duration-700 ${
               isVisible ? "scale-100 opacity-100" : "scale-0 opacity-0"
             } hover:scale-105 relative`}
-            style={{
-              boxShadow: "0 0 20px rgba(59, 130, 246, 0.2)",
-            }}
           >
-            <AvatarImage src="/fotomia.png?height=192&width=192" alt="Profile" />
+            <AvatarImage
+              src="/fotomia.png?height=192&width=192"
+              alt="Profile"
+            />
             <AvatarFallback className="text-4xl bg-gradient-to-br from-neutral-700 to-neutral-800 text-white">
               AB
             </AvatarFallback>
@@ -470,33 +286,30 @@ export default function Component() {
           <div className="space-y-4">
             <h1
               className={`text-3xl md:text-6xl font-bold transition-all duration-700 delay-300 ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
-              style={{
-                textShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
-              }}
             >
               Alejandro Bolado
             </h1>
             <p
-              className={`text-lg md:text-2xl text-neutral-400 font-light transition-all duration-700 delay-500 ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              Full Stack Web Developer
-            </p>
-            <p
               className={`text-md sm:text-lg text-neutral-500 max-w-2xl mx-auto transition-all duration-700 delay-700 ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
             >
-              Creando experiencias digitales excepcionales con código limpio y diseño moderno
+              Creando experiencias digitales excepcionales con código limpio y
+              diseño moderno
             </p>
           </div>
 
           <div
             className={`flex flex-wrap gap-4 justify-center transition-all duration-700 delay-900 ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
             }`}
           >
             <Badge
@@ -517,32 +330,29 @@ export default function Component() {
               variant="outline"
               className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-green-400 hover:text-green-400 transition-all duration-200 hover:shadow-md hover:shadow-green-400/15"
             >
-              <Shield className="w-4 h-4 mr-2" />
-              Ciberseguridad
+              <Camera className="w-4 h-4 mr-2" />
+              Fotografía
             </Badge>
           </div>
-
-          <div
-            className={`flex flex-col sm:flex-row gap-4 justify-center pt-8 transition-all duration-700 delay-1000 ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-            }`}
-          >
-            <Button
-              className="bg-white text-black hover:bg-neutral-200 hover:scale-105 transition-all duration-200 rounded-full px-8 py-3 font-medium hover:shadow-md hover:shadow-white/15"
-              onClick={() => scrollToSection("projects")}
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+            <svg
+              className="w-6 h-6 text-neutral-500"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
             >
-              Ver Proyectos
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Button>
-            <Button
-              variant="outline"
-              className="bg-white text-black hover:bg-neutral-200 hover:scale-105 transition-all duration-200 rounded-full px-8 py-3 font-medium hover:shadow-md hover:shadow-white/15"
-            >
-              Descargar CV
-              <Download className="w-4 h-4 ml-2" />
-            </Button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
           </div>
         </div>
+
+        <BackgroundBeams />
       </section>
 
       <main className="container mx-auto px-6 py-20 space-y-32 relative z-20">
@@ -551,18 +361,22 @@ export default function Component() {
           <div className="text-center space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold">Sobre Mí</h2>
             <p className="text-neutral-300 text-lg max-w-3xl mx-auto leading-relaxed">
-              Soy un desarrollador web apasionado con más de 3 años de experiencia creando aplicaciones web modernas y
-              responsivas. Me especializo en tecnologías como React, Next.js, Node.js y TypeScript. Mi enfoque está en
-              crear experiencias de usuario excepcionales con código limpio y eficiente.
+              Soy un desarrollador web apasionado con más de 3 años de
+              experiencia creando aplicaciones web modernas y responsivas. Me
+              especializo en tecnologías como React, Next.js, Node.js y
+              TypeScript. Mi enfoque está en crear experiencias de usuario
+              excepcionales con código limpio y eficiente.
             </p>
           </div>
 
           {/* Skills Grid */}
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-semibold text-center mb-12">Tecnologías</h3>
+            <h3 className="text-2xl font-semibold text-center mb-12">
+              Tecnologías
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {skills.map((skill, index) => {
-                const IconComponent = skill.icon
+                const IconComponent = skill.icon;
                 return (
                   <div
                     key={index}
@@ -577,10 +391,12 @@ export default function Component() {
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-neutral-400">{skill.level}%</span>
+                      <span className="text-sm text-neutral-400">
+                        {skill.level}%
+                      </span>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -633,8 +449,12 @@ export default function Component() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
-                    <CardTitle className="text-xl font-semibold text-white">{project.title}</CardTitle>
-                    <CardDescription className="text-neutral-300">{project.description}</CardDescription>
+                    <CardTitle className="text-xl font-semibold text-white">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-neutral-300">
+                      {project.description}
+                    </CardDescription>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, tagIndex) => (
@@ -680,8 +500,12 @@ export default function Component() {
                   >
                     <CardContent className="p-6">
                       <div className="space-y-3">
-                        <h4 className="font-semibold text-white text-lg">{exp.title}</h4>
-                        <p className="text-neutral-300 font-medium">{exp.company}</p>
+                        <h4 className="font-semibold text-white text-lg">
+                          {exp.title}
+                        </h4>
+                        <p className="text-neutral-300 font-medium">
+                          {exp.company}
+                        </p>
                         <div className="flex items-center text-sm text-neutral-400">
                           <Calendar className="w-4 h-4 mr-2" />
                           {exp.period}
@@ -708,8 +532,12 @@ export default function Component() {
                   >
                     <CardContent className="p-6">
                       <div className="space-y-3">
-                        <h4 className="font-semibold text-white text-lg">{edu.title}</h4>
-                        <p className="text-neutral-300 font-medium">{edu.institution}</p>
+                        <h4 className="font-semibold text-white text-lg">
+                          {edu.title}
+                        </h4>
+                        <p className="text-neutral-300 font-medium">
+                          {edu.institution}
+                        </p>
                         <div className="flex items-center text-sm text-neutral-400">
                           <Calendar className="w-4 h-4 mr-2" />
                           {edu.period}
@@ -744,7 +572,9 @@ export default function Component() {
                         <MessageSquare className="w-6 h-6 text-blue-400" />
                         Envíame un mensaje
                       </h3>
-                      <p className="text-neutral-300">Te responderé lo antes posible</p>
+                      <p className="text-neutral-300">
+                        Te responderé lo antes posible
+                      </p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -834,12 +664,17 @@ export default function Component() {
                           value: "Ciudad, País",
                         },
                       ].map((contact, index) => (
-                        <div key={index} className="flex items-center space-x-4">
+                        <div
+                          key={index}
+                          className="flex items-center space-x-4"
+                        >
                           <div className="w-12 h-12 bg-neutral-800 rounded-full flex items-center justify-center hover:bg-neutral-700 transition-colors duration-200">
                             <contact.icon className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <p className="text-white font-medium">{contact.label}</p>
+                            <p className="text-white font-medium">
+                              {contact.label}
+                            </p>
                             <p className="text-neutral-300">{contact.value}</p>
                           </div>
                         </div>
@@ -880,7 +715,9 @@ export default function Component() {
                           <social.icon className="w-6 h-6 mr-4" />
                           <div className="text-left">
                             <p className="font-medium">{social.name}</p>
-                            <p className="text-sm text-neutral-400">{social.handle}</p>
+                            <p className="text-sm text-neutral-400">
+                              {social.handle}
+                            </p>
                           </div>
                           <ArrowRight className="w-5 h-5 ml-auto" />
                         </Button>
@@ -901,7 +738,10 @@ export default function Component() {
             {/* Footer Header */}
             <div className="text-center space-y-6 mb-12">
               <Avatar className="w-20 h-20 mx-auto hover:scale-110 transition-transform duration-300">
-                <AvatarImage src="/fotomia.png?height=80&width=80" alt="Alejandro Bolado" />
+                <AvatarImage
+                  src="/fotomia.png?height=80&width=80"
+                  alt="Alejandro Bolado"
+                />
                 <AvatarFallback className="text-xl bg-gradient-to-br from-neutral-700 to-neutral-800 text-white">
                   AB
                 </AvatarFallback>
@@ -965,9 +805,12 @@ export default function Component() {
             {/* Footer Bottom */}
             <div className="border-t border-neutral-800 pt-8">
               <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div className="text-neutral-300 text-sm">© 2025 Alejandro Bolado. Todos los derechos reservados.</div>
+                <div className="text-neutral-300 text-sm">
+                  © 2025 Alejandro Bolado. Todos los derechos reservados.
+                </div>
                 <div className="text-neutral-300 text-sm flex items-center">
-                  Hecho con <span className="text-red-500 mx-1">❤️</span> y mucho café
+                  Hecho con <span className="text-red-500 mx-1">❤️</span> y
+                  mucho café
                 </div>
               </div>
             </div>
@@ -975,5 +818,5 @@ export default function Component() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
