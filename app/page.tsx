@@ -747,26 +747,9 @@ export default function Component() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-neutral-800 bg-neutral-900/20 py-16 relative z-20 backdrop-blur-sm">
+      <footer className="border-t border-neutral-800 bg-neutral-900/20 py-12 relative z-20 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            {/* Footer Header */}
-            <div className="text-center space-y-6 mb-12">
-              <Avatar className="w-20 h-20 mx-auto hover:scale-110 transition-transform duration-300">
-                <AvatarImage
-                  src="/fotomia.png?height=80&width=80"
-                  alt="Alejandro Bolado"
-                />
-                <AvatarFallback className="text-xl bg-gradient-to-br from-neutral-700 to-neutral-800 text-white">
-                  AB
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Alejandro Bolado</h3>
-                <p className="text-neutral-300">Web Developer</p>
-              </div>
-            </div>
-
             {/* Footer Content */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {/* Quick Links */}
