@@ -51,6 +51,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Lens } from "@/components/ui/lens";
+import BlurText from "@/components/BlurText";
 
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,6 +87,14 @@ export default function Component() {
 
   const projects = [
     {
+      title: "Syncord",
+      description:
+        "Plataforma de búsqueda de usuarios, servidores y bots de Discord.",
+      image: "/projects/syncord.png",
+      tags: ["Next.js", "TailwindCSS", "Discord.JS", "Express"],
+      link: "https://syncord.es/",
+    },
+    {
       title: "JGS Store",
       description:
         "Una tienda de scripts de Fivem hecha con NextJS y Tebex para JGS Store.",
@@ -100,7 +109,7 @@ export default function Component() {
       image: "/projects/studygate.png",
       tags: ["Next.js", "TailwindCSS", "Supabase", "ShadCN"],
       link: "https://studygate-kappa.vercel.app/",
-    }
+    },
   ];
 
   const education = [
@@ -193,21 +202,21 @@ export default function Component() {
                 className="text-neutral-300 hover:text-white transition-colors duration-200 font-medium relative group"
               >
                 Sobre Mí
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button
                 onClick={() => scrollToSection("projects")}
                 className="text-neutral-300 hover:text-white transition-colors duration-200 font-medium relative group"
               >
                 Proyectos
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button
                 onClick={() => scrollToSection("experience")}
                 className="text-neutral-300 hover:text-white transition-colors duration-200 font-medium relative group"
               >
                 Experiencia
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
@@ -291,14 +300,17 @@ export default function Component() {
 
           <div className="space-y-4">
             <h1
-              className={`text-3xl md:text-6xl font-bold transition-all duration-700 delay-300 ${
-                isVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+              className={`text-3xl md:text-6xl font-bold transition-all duration-700 delay-300`}
             >
-              Alejandro Bolado
+              <BlurText
+              text="Alejandro Bolado"
+              delay={200}
+              animateBy="words"
+              direction="top"
+              className={`flex items-center justify-center text-3xl md:text-6xl font-bold transition-all duration-700 delay-300`}
+            />
             </h1>
+            
             <p
               className={`text-md sm:text-lg text-neutral-500 max-w-2xl mx-auto transition-all duration-700 delay-700 ${
                 isVisible
@@ -320,21 +332,21 @@ export default function Component() {
           >
             <Badge
               variant="outline"
-              className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-blue-400 hover:text-blue-400 transition-all duration-200 hover:shadow-md hover:shadow-blue-400/15"
+              className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-white hover:text-white transition-all duration-200 hover:shadow-md hover:shadow-white/15"
             >
               <Code className="w-4 h-4 mr-2" />
               Frontend
             </Badge>
             <Badge
               variant="outline"
-              className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-purple-400 hover:text-purple-400 transition-all duration-200 hover:shadow-md hover:shadow-purple-400/15"
+              className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-white hover:text-white transition-all duration-200 hover:shadow-md hover:shadow-white/15"
             >
               <Database className="w-4 h-4 mr-2" />
               Backend
             </Badge>
             <Badge
               variant="outline"
-              className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-green-400 hover:text-green-400 transition-all duration-200 hover:shadow-md hover:shadow-green-400/15"
+              className="rounded-full px-6 py-3 bg-transparent border-neutral-600 text-neutral-300 hover:border-white hover:text-white transition-all duration-200 hover:shadow-md hover:shadow-white/15"
             >
               <Camera className="w-4 h-4 mr-2" />
               Fotografía
@@ -562,14 +574,14 @@ export default function Component() {
             {/* Experience */}
             <div className="space-y-8">
               <h3 className="text-2xl font-semibold flex items-center">
-                <Briefcase className="w-6 h-6 mr-3 text-blue-400" />
+                <Briefcase className="w-6 h-6 mr-3 text-white" />
                 Experiencia Profesional
               </h3>
               <div className="space-y-6">
                 {experience.map((exp, index) => (
                   <Card
                     key={index}
-                    className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-200 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-blue-500/5"
+                    className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-200 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-white/5"
                   >
                     <CardContent className="p-6">
                       <div className="space-y-3">
@@ -594,14 +606,14 @@ export default function Component() {
             {/* Education */}
             <div className="space-y-8">
               <h3 className="text-2xl font-semibold flex items-center">
-                <GraduationCap className="w-6 h-6 mr-3 text-purple-400" />
+                <GraduationCap className="w-6 h-6 mr-3 text-white" />
                 Educación
               </h3>
               <div className="space-y-6">
                 {education.map((edu, index) => (
                   <Card
                     key={index}
-                    className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-200 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-purple-500/5"
+                    className="rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-900/50 transition-all duration-200 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-white/5"
                   >
                     <CardContent className="p-6">
                       <div className="space-y-3">
@@ -637,10 +649,10 @@ export default function Component() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Card 1: Información de Contacto */}
-              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-green-500/5">
+              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-white/5">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold mb-6 flex items-center gap-4 text-white">
-                    <Phone className="w-6 h-6 text-green-400" />
+                    <Phone className="w-6 h-6 text-white" />
                     Información de Contacto
                   </h3>
                   <div className="space-y-6">
@@ -678,10 +690,10 @@ export default function Component() {
               </Card>
 
               {/* Card 2: Redes Sociales */}
-              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-purple-500/5">
+              <Card className="rounded-2xl border border-neutral-800 bg-neutral-900/30 transition-all duration-300 backdrop-blur-sm hover:border-neutral-700/50 hover:shadow-md hover:shadow-white/5">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold mb-6 flex items-center gap-4 text-white">
-                    <Globe className="w-6 h-6 text-purple-400" />
+                    <Globe className="w-6 h-6 text-white" />
                     Redes Sociales
                   </h3>
                   <div className="space-y-4">
@@ -690,19 +702,19 @@ export default function Component() {
                         icon: Github,
                         name: "GitHub",
                         handle: "@zelpro-dev",
-                        href: "https://github.com/zelpro-dev"
+                        href: "https://github.com/zelpro-dev",
                       },
                       {
                         icon: Instagram,
                         name: "Mi Instagram",
                         handle: "@alejandro_bolado_",
-                        href: "https://instagram.com/alejandro_bolado_"
+                        href: "https://instagram.com/alejandro_bolado_",
                       },
                       {
                         icon: Instagram,
                         name: "Bolado Visuals (Fotografía)",
                         handle: "@bolado.visuals",
-                        href: "https://instagram.com/bolado.visuals"
+                        href: "https://instagram.com/bolado.visuals",
                       },
                     ].map((social, index) => (
                       <Button
@@ -710,15 +722,20 @@ export default function Component() {
                         variant="outline"
                         className="w-full rounded-xl border-neutral-700 bg-neutral-900/30 hover:bg-neutral-900/30 hover:text-white text-white hover:scale-105 justify-start h-16 transition-all duration-200 backdrop-blur-sm "
                       >
-                        <a className="flex items-center justify-center w-full mx-auto" target="_blank" rel="noopener noreferrer" href={social.href}>
-                        <social.icon className="w-6 h-6 mr-4" />
-                        <div className="text-left">
-                          <p className="font-medium">{social.name}</p>
-                          <p className="text-sm text-neutral-400">
-                            {social.handle}
-                          </p>
-                        </div>
-                        <ArrowRight className="w-5 h-5 ml-auto" />
+                        <a
+                          className="flex items-center justify-center w-full mx-auto"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={social.href}
+                        >
+                          <social.icon className="w-6 h-6 mr-4" />
+                          <div className="text-left">
+                            <p className="font-medium">{social.name}</p>
+                            <p className="text-sm text-neutral-400">
+                              {social.handle}
+                            </p>
+                          </div>
+                          <ArrowRight className="w-5 h-5 ml-auto" />
                         </a>
                       </Button>
                     ))}
